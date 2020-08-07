@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
 
 // ui elements
-import { Divider, Heading, SimpleGrid } from "@chakra-ui/core";
+import { Divider, Heading, SimpleGrid, useTheme } from "@chakra-ui/core";
 
 // components
 import Metric from "../../components/Metric";
 import Histogram from "../../components/Histogram";
+import RecordKey from "../../components/RecordKey";
 
 const RenderMetrics = ({ data: { metrics } }) => {
   return Object.keys(metrics).map((metric) => {
@@ -16,8 +17,6 @@ const RenderMetrics = ({ data: { metrics } }) => {
 const getPercentage = (value) => {
   const roundUp = value.toFixed(2);
   const percentage = parseInt(roundUp.replace(/^0./, ""));
-
-  console.log(typeof percentage);
 
   return percentage;
 };
@@ -45,6 +44,7 @@ const TldPage = ({ cruxData }) => {
   const { tld } = router.query;
 
   const { record } = cruxData;
+  const { key } = record;
 
   return (
     <>
@@ -54,6 +54,7 @@ const TldPage = ({ cruxData }) => {
       <Heading as="h2" size="md">
         CRUX Report for: {record.key.url}
       </Heading>
+      <RecordKey data={key} />
       <Divider />
       <Heading size="sm" marginY="6">
         Summary of the 75th percentile of users
