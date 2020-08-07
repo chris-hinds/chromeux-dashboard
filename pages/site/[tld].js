@@ -13,16 +13,25 @@ const RenderMetrics = ({ data: { metrics } }) => {
   });
 };
 
+const getPercentage = (value) => {
+  const roundUp = value.toFixed(2);
+  const percentage = parseInt(roundUp.replace(/^0./, ""));
+
+  console.log(typeof percentage);
+
+  return percentage;
+};
+
 const RenderHistograms = ({ data: { metrics } }) => {
   return Object.keys(metrics).map((metric) => {
     const { histogram } = metrics[metric];
     let histogramData = [];
 
     histogram.map((group) => {
-      console.log(group);
       histogramData.push({
-        name: `>= ${group.start}`,
+        name: `${getPercentage(group.density)}%`,
         value: group.density,
+        label: `> ${group.start}`,
       });
     });
     return (
@@ -46,11 +55,19 @@ const TldPage = ({ cruxData }) => {
         CRUX Report for: {record.key.url}
       </Heading>
       <Divider />
+      <Heading size="sm" marginY="6">
+        Summary of the 75th percentile of users
+      </Heading>
       <SimpleGrid minChildWidth="220px" spacing={10}>
         <RenderMetrics data={record} />
       </SimpleGrid>
 
-      <RenderHistograms data={record} />
+      <Heading size="sm" marginY="6">
+        Histograms of user experiences for a given metric
+      </Heading>
+      <SimpleGrid minChildWidth="220px" spacing={10}>
+        <RenderHistograms data={record} />
+      </SimpleGrid>
     </>
   );
 };
