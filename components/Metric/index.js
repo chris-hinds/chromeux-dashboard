@@ -18,6 +18,7 @@ const MetricDetails = (name, data) => {
         shortName: "LCP",
         unit: "ms",
         helpText: `75% of users experienced a LCP of less than ${p75}ms`,
+        good: p75 <= 2500 ? true : false,
       };
       break;
     case "cumulative_layout_shift":
@@ -26,6 +27,7 @@ const MetricDetails = (name, data) => {
         shortName: "CLS",
         unit: null,
         helpText: `75% of users experienced a CLS score of less than ${p75}`,
+        good: p75 <= 0.1 ? true : false,
       };
       break;
     case "first_contentful_paint":
@@ -34,6 +36,7 @@ const MetricDetails = (name, data) => {
         shortName: "FCP",
         unit: "ms",
         helpText: `75% of users experienced an FCP of less than ${p75}ms`,
+        good: p75 <= 1000 ? true : false,
       };
       break;
     case "first_input_delay":
@@ -42,6 +45,7 @@ const MetricDetails = (name, data) => {
         shortName: "FID",
         unit: "ms",
         helpText: `75% of users experienced a FID of less than ${p75}ms`,
+        good: p75 <= 100 ? true : false,
       };
       break;
     default:
@@ -50,6 +54,7 @@ const MetricDetails = (name, data) => {
         shortName: name,
         unit: "ms",
         helpText: `75% of users experienced an ${name} of less than ${p75}ms`,
+        good: p75 <= 1000 ? true : false,
       };
   }
 };
@@ -67,6 +72,7 @@ const Metric = ({ name, data }) => {
       overflow="hidden"
       p="3"
       marginBottom="3"
+      color={summary.good ? "green.500" : "red.500"}
     >
       <Stat>
         <StatLabel>{summary.name}</StatLabel>
