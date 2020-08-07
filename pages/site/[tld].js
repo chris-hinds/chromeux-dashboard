@@ -1,14 +1,33 @@
 import { useRouter } from "next/router";
 
 // ui elements
-import { Divider, Heading } from "@chakra-ui/core";
+import { Divider, Heading, SimpleGrid } from "@chakra-ui/core";
 
 // components
 import Metric from "../../components/Metric";
+import Histogram from "../../components/Histogram";
 
 const RenderMetrics = ({ data: { metrics } }) => {
   return Object.keys(metrics).map((metric) => {
     return <Metric name={metric} data={metrics[metric]} key={`id-${metric}`} />;
+  });
+};
+
+const RenderHistograms = ({ data: { metrics } }) => {
+  return Object.keys(metrics).map((metric) => {
+    const { histogram } = metrics[metric];
+    let histogramData = [];
+
+    histogram.map((group) => {
+      console.log(group);
+      histogramData.push({
+        name: `>= ${group.start}`,
+        value: group.density,
+      });
+    });
+    return (
+      <Histogram name={metric} data={histogramData} key={`id-${metric}`} />
+    );
   });
 };
 
@@ -27,7 +46,11 @@ const TldPage = ({ cruxData }) => {
         CRUX Report for: {record.key.url}
       </Heading>
       <Divider />
-      <RenderMetrics data={record} />
+      <SimpleGrid minChildWidth="220px" spacing={10}>
+        <RenderMetrics data={record} />
+      </SimpleGrid>
+
+      <RenderHistograms data={record} />
     </>
   );
 };
