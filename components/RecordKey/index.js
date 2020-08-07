@@ -5,7 +5,7 @@ import { Button, Box, Text, Tooltip, Stack } from "@chakra-ui/core";
 import { MdSmartphone, MdTabletMac, MdDesktopMac } from "react-icons/md";
 
 const isDisabled = (value, currentValue) =>
-  value === currentValue ? true : false;
+  value.toLowerCase() === currentValue.toLowerCase() ? true : false;
 
 const RecordKey = ({ data }) => {
   const router = useRouter();
