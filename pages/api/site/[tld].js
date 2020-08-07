@@ -22,7 +22,7 @@ export default async (req, res) => {
   } = req;
 
   const REQUEST_BODY = {
-    effectiveConnectionType: CONNECTION_TYPE,
+    // effectiveConnectionType: CONNECTION_TYPE,
     formFactor: DEVICE,
     metrics: METRICS,
     url: `${SITE_BASE_URL}/${tld}`,
@@ -36,7 +36,7 @@ export default async (req, res) => {
     );
 
     const { data, status } = cruxResponse;
-    console.log(`Request Body --------` + JSON.stringify(data));
+
     if (status != 200) {
       res.send("error fetch data");
     }
