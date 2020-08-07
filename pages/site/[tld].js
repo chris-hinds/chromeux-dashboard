@@ -24,7 +24,7 @@ const TldPage = ({ cruxData }) => {
         {tld}
       </Heading>
       <Heading as="h2" size="md">
-        CRUX Report
+        CRUX Report for: {record.key.url}
       </Heading>
       <Divider />
       <RenderMetrics data={record} />
