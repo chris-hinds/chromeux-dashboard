@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 import { Divider, Heading, SimpleGrid, useTheme } from "@chakra-ui/core";
 
 // components
-import Metric from "../../components/Metric";
-import Histogram from "../../components/Histogram";
-import RecordKey from "../../components/RecordKey";
+import Metric from "../../../components/Metric";
+import Histogram from "../../../components/Histogram";
+import RecordKey from "../../../components/RecordKey";
 
 const RenderMetrics = ({ data: { metrics } }) => {
   return Object.keys(metrics).map((metric) => {
@@ -74,7 +74,9 @@ const TldPage = ({ cruxData }) => {
 };
 
 export async function getServerSideProps({ query }) {
-  const res = await fetch(`${process.env.APP_API_ENDPOINT}/site/${query.tld}`);
+  const res = await fetch(
+    `${process.env.APP_API_ENDPOINT}/site/${query.tld}/${query.device}`
+  );
   const json = await res.json();
 
   return {

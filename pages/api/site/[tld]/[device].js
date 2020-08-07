@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const SITE_BASE_URL = "https://www.bbc.com";
-const CONNECTION_TYPE = "3G";
 const DEVICE = "PHONE";
 const METRICS = [
   "first_contentful_paint",
@@ -18,12 +17,11 @@ const REQUEST_CONFIG = {
 
 export default async (req, res) => {
   const {
-    query: { tld },
+    query: { tld, device },
   } = req;
 
   const REQUEST_BODY = {
-    effectiveConnectionType: CONNECTION_TYPE,
-    formFactor: DEVICE,
+    formFactor: device,
     metrics: METRICS,
     url: `${SITE_BASE_URL}/${tld}`,
   };
