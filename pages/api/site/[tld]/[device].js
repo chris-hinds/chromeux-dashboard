@@ -1,6 +1,5 @@
 import axios from "axios";
 
-const SITE_BASE_URL = "https://www.bbc.com";
 const DEVICE = "PHONE";
 const METRICS = [
   "first_contentful_paint",
@@ -17,13 +16,13 @@ const REQUEST_CONFIG = {
 
 export default async (req, res) => {
   const {
-    query: { tld, device },
+    query: { tld },
   } = req;
 
   const REQUEST_BODY = {
-    formFactor: device,
+    formFactor: DEVICE,
     metrics: METRICS,
-    url: `${SITE_BASE_URL}/${tld}`,
+    url: tld,
   };
 
   try {
@@ -36,7 +35,7 @@ export default async (req, res) => {
     const { data, status } = cruxResponse;
 
     if (status != 200) {
-      res.send("error fetch data");
+      res.send("error fetching crux data");
     }
 
     res.send(data);
