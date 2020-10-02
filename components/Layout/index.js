@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 
-const Container = styled.div`
-  padding: 32px;
-`;
+const Container = styled.div``;
 
 const Layout = ({ children }) => {
   return <Container>{children}</Container>;

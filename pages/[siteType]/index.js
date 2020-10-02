@@ -46,7 +46,6 @@ const Error = ({ error }) => (
 );
 
 const TldPage = ({ cruxData }) => {
-  console.log(cruxData);
   const router = useRouter();
   const { url } = router.query;
 
