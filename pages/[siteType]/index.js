@@ -64,7 +64,6 @@ const TldPage = ({ cruxData }) => {
           <Heading as="h2" size="md">
             CRUX Report for: {record.key.url || record.key.origin}
           </Heading>
-          <RecordKey data={record.key} />
           <Divider />
           <Heading size="sm" marginY="6">
             Summary of the 75th percentile of users
