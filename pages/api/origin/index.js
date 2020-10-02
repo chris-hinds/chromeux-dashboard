@@ -16,13 +16,13 @@ const REQUEST_CONFIG = {
 
 export default async (req, res) => {
   const {
-    query: { tld },
+    query: { url },
   } = req;
 
   const REQUEST_BODY = {
     formFactor: DEVICE,
     metrics: METRICS,
-    url: tld,
+    origin: url,
   };
 
   try {
@@ -35,7 +35,7 @@ export default async (req, res) => {
     const { data, status } = cruxResponse;
 
     if (status != 200) {
-      res.send("error fetching crux data");
+      res.status(404).send({ error: "No CRUX data was found for this URL" });
     }
 
     res.send(data);
