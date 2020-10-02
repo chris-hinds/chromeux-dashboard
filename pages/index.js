@@ -31,6 +31,7 @@ export default function Home() {
   };
 
   const handleFormSubmit = (event) => {
+    event.preventDefault();
     router.push(`/origin?url=${formInput.value}`);
   };
   return (
