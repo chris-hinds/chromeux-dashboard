@@ -4,27 +4,33 @@ import { useState } from "react";
 
 // ui elements
 import styled from "@emotion/styled";
-import {
-  Button,
-  Flex,
-  FormControl,
-  FormHelperText,
-  Heading,
-  Input,
-  InputGroup,
-} from "@chakra-ui/core";
+import { Box, Button, Flex, Heading, Input } from "@chakra-ui/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeartbeat } from "@fortawesome/free-solid-svg-icons";
 
 const Wrappper = styled.div`
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #2ac0da;
+  height: 100%;
+`;
+
+const HeroWrapper = styled(Flex)`
+  height: 60vh;
+  background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);
+  font-family: "Montserrat", sans-serif;
+`;
+
+const LogoWrapper = styled.div`
+  width: 80px;
+`;
+
+const Form = styled.form`
+  width: 100%;
 `;
 
 export default function Home() {
   const router = useRouter();
-  const [formInput, setFormInput] = useState({ value: "" });
+  const [FormInput, setFormInput] = useState({ value: "" });
 
   const handleFormChange = (event) => {
     setFormInput({ value: event.target.value });
@@ -32,7 +38,7 @@ export default function Home() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    router.push(`/origin?url=${formInput.value}`);
+    router.push(`/origin?url=${FormInput.value}`);
   };
   return (
     <Wrappper>
@@ -40,37 +46,67 @@ export default function Home() {
         <title>Web-Vitals | chrishinds.dev</title>
       </Head>
 
-      <Flex align="center" justify="center" direction="column" size="100%">
-        <Flex direction="column" height="40%" align="center" justify="center">
-          <Heading as="h1" size="lg">
-            Web-Vitals User Experience Dashboard
-          </Heading>
-          <Heading as="h2" size="2xl" textAlign="center">
-            Visualise how Google and real world users experience your website
-          </Heading>
-        </Flex>
+      <Flex align="center" justify="center" direction="column" width>
+        <HeroWrapper width="100%" justify="center">
+          <Flex
+            direction="column"
+            align="center"
+            justify="center"
+            width={["90%", "80%", "70%"]}
+          >
+            <LogoWrapper>
+              <FontAwesomeIcon icon={faHeartbeat} size="2x" color="white" />
+            </LogoWrapper>
+            <Flex
+              direction="column"
+              align="center"
+              justify="center"
+              height="40%"
+            >
+              <Heading
+                as="h1"
+                size="2xl"
+                fontFamily="'Montserrat', sans-serif"
+                fontWeight="400"
+                color="white"
+                paddingY="20px"
+              >
+                Monitor User Experience
+              </Heading>
+              <Heading
+                as="h3"
+                size="lg"
+                textAlign="center"
+                ontFamily="'Montserrat', sans-serif"
+                fontWeight="200"
+                color="white"
+              >
+                Visualise how Google and real world users experience your
+                website
+              </Heading>
+            </Flex>
 
-        <Flex direction="column" height="60%">
-          <form onSubmit={handleFormSubmit}>
-            <FormControl>
-              <InputGroup size="lg">
+            <Flex
+              direction="row"
+              width={["100%", "90%", "70%"]}
+              justify="center"
+            >
+              <Form onSubmit={handleFormSubmit}>
                 <Input
                   type="url"
                   isRequired
-                  value={formInput.value}
+                  value={FormInput.value}
                   onChange={handleFormChange}
                   placeholder="https://www.bbc.co.uk"
+                  width="100%"
                 />
-              </InputGroup>
-              <FormHelperText id="email-helper-text">
-                Enter a websites origin or a popular page url.
-              </FormHelperText>
-            </FormControl>
-            <Button mt={4} variantColor="teal" type="submit">
-              Submit
-            </Button>
-          </form>
-        </Flex>
+                <Button mt={4} type="submit">
+                  Show Me!
+                </Button>
+              </Form>
+            </Flex>
+          </Flex>
+        </HeroWrapper>
       </Flex>
     </Wrappper>
   );
