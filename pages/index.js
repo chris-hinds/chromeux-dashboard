@@ -38,7 +38,7 @@ export default function Home() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    router.push(`/origin?url=${FormInput.value}`);
+    router.push(`/dashboard?url=${FormInput.value}`);
   };
   return (
     <Wrappper>

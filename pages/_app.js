@@ -4,6 +4,11 @@ import { CSSReset, ThemeProvider } from "@chakra-ui/core";
 // components
 import Layout from "../components/Layout";
 
+import "../node_modules/primereact/resources/themes/nova/theme.css";
+import "../node_modules/primereact/resources/primereact.min.css";
+import "../node_modules/primeflex/primeflex.css";
+import "../node_modules/primeicons/primeicons.css";
+
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider>
