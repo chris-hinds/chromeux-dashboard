@@ -38,7 +38,6 @@ const TldPage = ({ pageUrl }) => {
 
   return (
     <>
-      <h1>Hello</h1>
       {!data && <ProgressBar mode="indeterminate" />}
       {error && <Error error={"error"} />}
       {data && <Dashboard data={data} />}
