@@ -4,10 +4,20 @@ import { useRouter } from "next/router";
 import { Divider, Heading, SimpleGrid, useTheme } from "@chakra-ui/core";
 
 // components
-import Metric from "../../components/Metric";
-import Histogram from "../../components/Histogram";
-import RecordKey from "../../components/RecordKey";
-import WebVitals from "../../containers/WebVitals";
+import Dashboard from "../../containers/Dashboard";
+
+// data fetching
+import fetcher from "../../utilities/fetcher";
+import useSWR from "swr";
+
+// ui elements
+import { ProgressBar } from "primereact/progressbar";
+
+const SWR_OPTIONS = {
+  revalidateOnReconnect: false,
+  refreshWhenOffline: false,
+  revalidateOnFocus: false,
+};
 
 const Error = ({ error }) => (
   <Heading as="h3" size="md">
@@ -15,33 +25,31 @@ const Error = ({ error }) => (
   </Heading>
 );
 
-const LighthouseAudits = ({ audits }) => {
-  return <></>;
-};
+const getApiPath = (url) =>
+  `${process.env.NEXT_PUBLIC_APP_API_ENDPOINT}/psi?url=${url}`;
 
-const TldPage = ({ psiData }) => {
-  const router = useRouter();
-  const { url } = router.query;
+const TldPage = ({ pageUrl }) => {
+  // const router = useRouter();
+  // const { url } = router.query;
 
-  const { lighthouseResult, loadingExperience: webViatlsData, error } = psiData;
-  const { audits } = lighthouseResult;
+  // fetch data
+  const apiPath = getApiPath(pageUrl);
+  const { data, isValidating, error } = useSWR(apiPath, fetcher, SWR_OPTIONS);
 
   return (
     <>
-      <WebVitals data={webViatlsData} />
+      <h1>Hello</h1>
+      {!data && <ProgressBar mode="indeterminate" />}
+      {error && <Error error={"error"} />}
+      {data && <Dashboard data={data} />}
     </>
   );
 };
 
 export async function getServerSideProps({ query }) {
-  const res = await fetch(
-    `${process.env.APP_API_ENDPOINT}/psi?url=${query.url}`
-  );
-  const json = await res.json();
-
   return {
     props: {
-      psiData: json,
+      pageUrl: query.url,
     },
   };
 }
