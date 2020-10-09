@@ -26,7 +26,7 @@ const Error = ({ error }) => (
 );
 
 const getApiPath = (url) =>
-  `${process.env.NEXT_PUBLIC_APP_API_ENDPOINT}/psi?url=${url}`;
+  `${process.env.NEXT_PUBLIC_PSI_API_BASE_ENDPOINT}?url=${url}&key=${process.env.NEXT_PUBLIC_PSI_API_KEY}`;
 
 const TldPage = ({ pageUrl }) => {
   // const router = useRouter();
