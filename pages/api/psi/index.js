@@ -22,7 +22,6 @@ export default async (req, res) => {
   };
 
   try {
-    console.log(req.query);
     const psiResponse = await axios.get(
       process.env.PSI_API_BASE_ENDPOINT,
       REQUEST_CONFIG
