@@ -1,5 +1,6 @@
 // Components
 import WebVitalsMetric from "../../components/WebVitalsMetric";
+import WebVitalsScore from "../../components/WebVitalsScore";
 
 const SUPPORTED_METRICS = [
   "FIRST_INPUT_DELAY_MS",
@@ -33,7 +34,7 @@ const METRIC_INFO = {
 
 const RenderMetrics = ({ metrics }) => {
   return SUPPORTED_METRICS.map((metric) => (
-    <div className="p-col-6">
+    <div className="p-col-3">
       <WebVitalsMetric
         metric={metrics[metric]}
         title={METRIC_INFO[metric].title}
@@ -44,16 +45,18 @@ const RenderMetrics = ({ metrics }) => {
   ));
 };
 
-const WebVitals = ({ data }) => {
+const WebVitals = ({ data, image }) => {
   const { metrics, overall_category: score } = data;
   return (
     <div className="p-grid nested-grid">
-      <div className="p-col-8">
+      <div className="p-col-12">
         <div className="p-grid">
           <RenderMetrics metrics={metrics} />
         </div>
       </div>
-      <div className="p-col-4">{score}</div>
+      {/* <div className="p-col-4">
+        <WebVitalsScore title="Overall Score" score={score} image={image} />
+      </div> */}
     </div>
   );
 };

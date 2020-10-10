@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { CSSReset, ThemeProvider } from "@chakra-ui/core";
+import "./styles.css";
 
 // components
 import Layout from "../components/Layout";
