@@ -3,9 +3,9 @@ import { Card } from "primereact/card";
 import { RiPulseLine } from "react-icons/ri";
 
 const BADGE_COLOUR = {
-  FAST: "#689F38",
-  AVERAGE: "#FFC107",
-  SLOW: "#D32F2F",
+  FAST: "#A0D468",
+  AVERAGE: "#FFCE54",
+  SLOW: "#ED5565",
 };
 
 const WebVitalsMetric = ({ metric, title, shortTitle, unit }) => {

@@ -1,8 +1,9 @@
-import { useRouter } from "next/router";
-// import fixtureData from "../api/fixtures/mundoPsi.json";
+import fixtureData from "../api/fixtures/mundoPsi.json";
 
 // ui elements
-import { Divider, Heading, SimpleGrid, useTheme } from "@chakra-ui/core";
+import { Heading } from "@chakra-ui/core";
+import { Toolbar } from "primereact/toolbar";
+import { InputText } from "primereact/inputtext";
 
 // components
 import Dashboard from "../../containers/Dashboard";
@@ -29,6 +30,13 @@ const Error = ({ error }) => (
 const getApiPath = (url) =>
   `${process.env.NEXT_PUBLIC_PSI_API_BASE_ENDPOINT}?url=${url}&key=${process.env.NEXT_PUBLIC_PSI_API_KEY}`;
 
+const toolbarSearchBar = () => (
+  <span className="p-input-icon-left">
+    {/* <i className="pi pi-search" />
+    <InputText placeholder="Search" /> */}
+  </span>
+);
+
 const TldPage = ({ pageUrl }) => {
   // const router = useRouter();
   // const { url } = router.query;
@@ -39,7 +47,7 @@ const TldPage = ({ pageUrl }) => {
 
   return (
     <>
-      <div>Dashboard header Here</div>
+      <Toolbar left={toolbarSearchBar} style={{ backgroundColor: "#fff" }} />
       {!data && <ProgressBar mode="indeterminate" />}
       {error && <Error error={"error"} />}
       {data && <Dashboard data={data} />}
