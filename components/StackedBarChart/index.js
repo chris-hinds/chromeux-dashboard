@@ -41,7 +41,7 @@ let stackedOptions = {
       {
         stacked: true,
         ticks: {
-          display: false,
+          fontColor: "#495057",
         },
         gridLines: {
           color: "#ebedef",

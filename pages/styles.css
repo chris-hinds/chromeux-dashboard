@@ -1,3 +1,10 @@
 body {
   background-color: #f4f7fc;
 }
+
+/* Dashboard Tabs */
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-linkk {
+  border: 0;
+  background: none;
+}

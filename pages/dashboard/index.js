@@ -43,14 +43,25 @@ const TldPage = ({ pageUrl }) => {
 
   // fetch data
   const apiPath = getApiPath(pageUrl);
-  const { data, isValidating, error } = useSWR(apiPath, fetcher, SWR_OPTIONS);
+  const {
+    data: desktopData,
+    isValidating: desktopValidating,
+    error: desktopError,
+  } = useSWR(apiPath, fetcher, SWR_OPTIONS);
+  const {
+    data: mobileData,
+    isValidating: modileValidating,
+    error: mobileError,
+  } = useSWR(`${apiPath}&straegy=MOBILE`, fetcher, SWR_OPTIONS);
+
+  // console.log(mobileData);
 
   return (
     <>
       <Toolbar left={toolbarSearchBar} style={{ backgroundColor: "#fff" }} />
-      {!data && <ProgressBar mode="indeterminate" />}
-      {error && <Error error={"error"} />}
-      {data && <Dashboard data={data} />}
+      {!mobileData && <ProgressBar mode="indeterminate" />}
+      {mobileError && <Error error={"error"} />}
+      {mobileData && <Dashboard data={mobileData} />}
     </>
   );
 };

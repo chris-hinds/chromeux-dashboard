@@ -2,7 +2,7 @@
 import { Card } from "primereact/card";
 
 // Components
-import StackedBarChart from "../../components/StackedBarChart";
+import WebVitalsTargetChart from "../../components/WebVitalsTargetChart";
 import SectionTitle from "../../components/SectionTitle";
 
 const LoadingExperience = ({ pageData, originData }) => {
@@ -28,22 +28,38 @@ const LoadingExperience = ({ pageData, originData }) => {
         <div className="p-grid">
           <div className="p-col-6">
             <Card>
-              <StackedBarChart metric={pageCLS} metricName="CLS" />
+              <WebVitalsTargetChart
+                metric={pageCLS}
+                target={10}
+                metricName="CLS"
+              />
             </Card>
           </div>
           <div className="p-col-6">
             <Card>
-              <StackedBarChart metric={pageLCP} metricName="LCP" />
+              <WebVitalsTargetChart
+                metric={pageLCP}
+                target={2500}
+                metricName="LCP"
+              />
             </Card>
           </div>
           <div className="p-col-6">
             <Card>
-              <StackedBarChart metric={pageFCP} metricName="FCP" />
+              <WebVitalsTargetChart
+                metric={pageFCP}
+                target={1000}
+                metricName="FCP"
+              />
             </Card>
           </div>
           <div className="p-col-6">
             <Card>
-              <StackedBarChart metric={pageFID} metricName="FID" />
+              <WebVitalsTargetChart
+                metric={pageFID}
+                target={100}
+                metricName="FID"
+              />
             </Card>
           </div>
         </div>
